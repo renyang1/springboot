@@ -1,0 +1,56 @@
+# \u516C\u53F8\u73AF\u5883\u914D\u7F6E(\u6240\u6709\u670D\u52A1\u5728linux\u7684docker\u4E0A)
+server:
+  port: 8080
+
+spring:
+  datasource:
+    druid:
+      ryang:
+        #\u914D\u7F6E\u76D1\u63A7\u7EDF\u8BA1\u62E6\u622A\u7684filters\uFF0C\u53BB\u6389\u540E\u76D1\u63A7\u754C\u9762SQL\u65E0\u6CD5\u8FDB\u884C\u7EDF\u8BA1\uFF0C'wall'\u7528\u4E8E\u9632\u706B\u5899
+        filters: stat,wall
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.254.128:3306/ryang?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+        username: renyang
+        password: 199426
+        #\u521D\u59CB\u5316\u5927\u5C0F
+        initial-size: 1
+        #\u6700\u5C0F\u8FDE\u63A5\u6570
+        min-idle: 1
+        #\u6700\u5927\u8FDE\u63A5\u6570
+        max-active: 20
+        #\u83B7\u53D6\u8FDE\u63A5\u7B49\u5F85\u8D85\u65F6\u65F6\u95F4
+        max-wait: 60000
+        #\u95F4\u9694\u591A\u4E45\u624D\u8FDB\u884C\u4E00\u6B21\u68C0\u6D4B\uFF0C\u68C0\u6D4B\u9700\u8981\u5173\u95ED\u7684\u7A7A\u95F2\u8FDE\u63A5\uFF0C\u5355\u4F4D\u6BEB\u79D2
+        time-between-eviction-runs-millis: 60000
+        #\u4E00\u4E2A\u8FDE\u63A5\u5728\u6C60\u4E2D\u6700\u5C0F\u751F\u5B58\u7684\u65F6\u95F4\uFF0C\u5355\u4F4D\u662F\u6BEB\u79D2
+        min-evictable-idle-time-millis: 30000
+        #\u6D4B\u8BD5\u8BED\u53E5\u662F\u5426\u6267\u884C\u6B63\u786E
+        validation-query: SELECT 'x'
+        #\u6307\u660E\u8FDE\u63A5\u662F\u5426\u88AB\u7A7A\u95F2\u8FDE\u63A5\u56DE\u6536\u5668(\u5982\u679C\u6709)\u8FDB\u884C\u68C0\u9A8C.\u5982\u679C\u68C0\u6D4B\u5931\u8D25,\u5219\u8FDE\u63A5\u5C06\u88AB\u4ECE\u6C60\u4E2D\u53BB\u9664.
+        test-while-idle: true
+        #\u501F\u51FA\u8FDE\u63A5\u65F6\u4E0D\u8981\u6D4B\u8BD5\uFF0C\u5426\u5219\u5F88\u5F71\u54CD\u6027\u80FD
+        test-on-borrow: false
+        test-on-return: false
+        #\u6253\u5F00PSCache\uFF0C\u5E76\u6307\u5B9A\u6BCF\u4E2A\u8FDE\u63A5\u4E0APSCache\u7684\u5927\u5C0F\u3002oracle\u8BBE\u4E3Atrue\uFF0Cmysql\u8BBE\u4E3Afalse\u3002\u5206\u5E93\u5206\u8868\u8F83\u591A\u63A8\u8350\u8BBE\u7F6E\u4E3Afalse
+        pool-prepared-statements: false
+        #\u4E0EOracle\u6570\u636E\u5E93PSCache\u6709\u5173\uFF0C\u518Ddruid\u4E0B\u53EF\u4EE5\u8BBE\u7F6E\u7684\u6BD4\u8F83\u9AD8
+        max-pool-prepared-statement-per-connection-size: 20
+      #\u6570\u636E\u6E902
+      test2:
+        filters: stat,wall
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/mytest2?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+        username: root
+        password: root
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 30000
+        validation-query: SELECT 'x'
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 20

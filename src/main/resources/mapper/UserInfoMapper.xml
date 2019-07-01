@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ryang.springboot.mapper.ryang.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ryang.springboot.pojo.UserInfo">
+        <result column="UserId" jdbcType="INTEGER" property="userId" />
+        <result column="Account" jdbcType="VARCHAR" property="account" />
+        <result column="NickName" jdbcType="VARCHAR" property="nickName" />
+        <result column="RemarkName" jdbcType="VARCHAR" property="remarkName" />
+        <result column="Age" jdbcType="INTEGER" property="age" />
+        <result column="BirthMonth" jdbcType="DATE" property="birthMonth" />
+        <result column="HeadUrl" jdbcType="VARCHAR" property="headUrl" />
+        <result column="RegisterDate" jdbcType="TIMESTAMP" property="registerDate" />
+        <result column="RegisterIP" jdbcType="VARCHAR" property="registerIp" />
+        <result column="Province" jdbcType="VARCHAR" property="province" />
+        <result column="City" jdbcType="VARCHAR" property="city" />
+        <result column="Area" jdbcType="VARCHAR" property="area" />
+        <result column="DetailAddress" jdbcType="VARCHAR" property="detailAddress" />
+        <result column="Sex" jdbcType="CHAR" property="sex" />
+    </resultMap>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from userinfo where userid = #{userId} limit 1
+    </select>
+
+</mapper>

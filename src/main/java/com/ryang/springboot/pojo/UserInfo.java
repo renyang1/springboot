@@ -1,4 +1,4 @@
-package com.ryang.springboot.domain;
+package com.ryang.springboot.pojo;
 
 import lombok.Data;
 
