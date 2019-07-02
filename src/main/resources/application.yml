@@ -1,9 +1,11 @@
 spring:
   profiles:
     active: company
-# 公司环境配置(所有服务在linux的docker上)
-server:
-  port: 8080
+  # 使用CGLIB来实现AOP,不配置则默认使用Java的实现
+  aop:
+    proxy-target-class=true
+  server:
+    port: 8080
 
 mybatis:
   # 映射文件所在路径
@@ -17,3 +19,4 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+

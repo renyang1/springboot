@@ -1,5 +1,6 @@
 package com.ryang.springboot.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -27,11 +28,13 @@ public class UserInfo {
     /**
      * 出生年月（2019-02-01）
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthMonth;
     private String headUrl;
     /**
      * 注册日期(2018-10-20 22:37:13)
      * */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registerDate;
     private String registerIp;
     /**
