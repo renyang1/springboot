@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Date: 2019/7/1 16:46
  * @Description:
  */
-@Mapper
 public interface UserInfoMapper {
     /**
      * 根据用户id查询用户信息

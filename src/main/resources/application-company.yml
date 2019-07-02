@@ -1,41 +1,37 @@
-# \u516C\u53F8\u73AF\u5883\u914D\u7F6E(\u6240\u6709\u670D\u52A1\u5728linux\u7684docker\u4E0A)
-server:
-  port: 8080
-
 spring:
   datasource:
     druid:
       ryang:
-        #\u914D\u7F6E\u76D1\u63A7\u7EDF\u8BA1\u62E6\u622A\u7684filters\uFF0C\u53BB\u6389\u540E\u76D1\u63A7\u754C\u9762SQL\u65E0\u6CD5\u8FDB\u884C\u7EDF\u8BA1\uFF0C'wall'\u7528\u4E8E\u9632\u706B\u5899
+        #配置监控统计拦截的filters，去掉后监控界面SQL无法进行统计，'wall'用于防火墙
         filters: stat,wall
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://192.168.254.128:3306/ryang?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
         username: renyang
         password: 199426
-        #\u521D\u59CB\u5316\u5927\u5C0F
+        #初始化大小
         initial-size: 1
-        #\u6700\u5C0F\u8FDE\u63A5\u6570
+        #最小连接数
         min-idle: 1
-        #\u6700\u5927\u8FDE\u63A5\u6570
+        #最大连接数
         max-active: 20
-        #\u83B7\u53D6\u8FDE\u63A5\u7B49\u5F85\u8D85\u65F6\u65F6\u95F4
+        #获取连接等待超时时间
         max-wait: 60000
-        #\u95F4\u9694\u591A\u4E45\u624D\u8FDB\u884C\u4E00\u6B21\u68C0\u6D4B\uFF0C\u68C0\u6D4B\u9700\u8981\u5173\u95ED\u7684\u7A7A\u95F2\u8FDE\u63A5\uFF0C\u5355\u4F4D\u6BEB\u79D2
+        #间隔多久才进行一次检测，检测需要关闭的空闲连接，单位毫秒
         time-between-eviction-runs-millis: 60000
-        #\u4E00\u4E2A\u8FDE\u63A5\u5728\u6C60\u4E2D\u6700\u5C0F\u751F\u5B58\u7684\u65F6\u95F4\uFF0C\u5355\u4F4D\u662F\u6BEB\u79D2
+        #一个连接在池中最小生存的时间，单位是毫秒
         min-evictable-idle-time-millis: 30000
-        #\u6D4B\u8BD5\u8BED\u53E5\u662F\u5426\u6267\u884C\u6B63\u786E
+        #测试语句是否执行正确
         validation-query: SELECT 'x'
-        #\u6307\u660E\u8FDE\u63A5\u662F\u5426\u88AB\u7A7A\u95F2\u8FDE\u63A5\u56DE\u6536\u5668(\u5982\u679C\u6709)\u8FDB\u884C\u68C0\u9A8C.\u5982\u679C\u68C0\u6D4B\u5931\u8D25,\u5219\u8FDE\u63A5\u5C06\u88AB\u4ECE\u6C60\u4E2D\u53BB\u9664.
+        #指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除.
         test-while-idle: true
-        #\u501F\u51FA\u8FDE\u63A5\u65F6\u4E0D\u8981\u6D4B\u8BD5\uFF0C\u5426\u5219\u5F88\u5F71\u54CD\u6027\u80FD
+        #借出连接时不要测试，否则很影响性能
         test-on-borrow: false
         test-on-return: false
-        #\u6253\u5F00PSCache\uFF0C\u5E76\u6307\u5B9A\u6BCF\u4E2A\u8FDE\u63A5\u4E0APSCache\u7684\u5927\u5C0F\u3002oracle\u8BBE\u4E3Atrue\uFF0Cmysql\u8BBE\u4E3Afalse\u3002\u5206\u5E93\u5206\u8868\u8F83\u591A\u63A8\u8350\u8BBE\u7F6E\u4E3Afalse
+        #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
         pool-prepared-statements: false
-        #\u4E0EOracle\u6570\u636E\u5E93PSCache\u6709\u5173\uFF0C\u518Ddruid\u4E0B\u53EF\u4EE5\u8BBE\u7F6E\u7684\u6BD4\u8F83\u9AD8
+        #与Oracle数据库PSCache有关，再druid下可以设置的比较高
         max-pool-prepared-statement-per-connection-size: 20
-      #\u6570\u636E\u6E902
+      #数据源2
       test2:
         filters: stat,wall
         driver-class-name: com.mysql.jdbc.Driver
