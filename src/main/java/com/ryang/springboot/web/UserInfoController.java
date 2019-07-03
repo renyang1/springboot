@@ -22,8 +22,6 @@ public class UserInfoController {
     @PostMapping("/getUserInfo")
     public UserInfo selectById(Integer userId) {
         UserInfo userInfo = userInfoService.selectById(userId);
-        int i = 2/0;
-        System.out.println(i);
         return userInfo;
     }
 }
