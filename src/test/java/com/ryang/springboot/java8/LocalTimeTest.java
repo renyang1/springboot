@@ -2,11 +2,9 @@ package com.ryang.springboot.java8;
 
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * @Auther: renyang
@@ -46,6 +44,41 @@ public class LocalTimeTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateTime5 = LocalDateTime.parse("2019-07-03 19:45:30",formatter);
         System.out.println(dateTime5.format(formatter));
+    }
+
+    /**
+     * Description: 计算两个时间的时间差
+     * @auther: renyang
+     * @param:
+     * @return:
+     * @date: 2019/7/4 11:41
+     */
+    @Test
+    public void compare() {
+        // 获取当前时间
+        LocalDateTime dateTime1 = LocalDateTime.now();
+        System.out.println(dateTime1);
+        // 将当前时间增加12小时
+        LocalDateTime dateTime2 = dateTime1.plus(200, ChronoUnit.DAYS);
+        System.out.println(dateTime2);
+
+        // 1.使用带时间单位的until()直接返回指定单位的时间差，这里的时间单位可以是年、月、日、星期、时、分、秒等
+        long differHours = dateTime1.until(dateTime2, ChronoUnit.HOURS);
+        System.out.println("相差" + differHours + "个小时");
+        long differDays = dateTime1.until(dateTime2, ChronoUnit.DAYS);
+        System.out.println("相差" + differDays + "天");
+        long diffWeeks = dateTime1.until(dateTime2, ChronoUnit.WEEKS);
+        System.out.println("相差" + diffWeeks + "个星期");
+
+        // 2.使用Duration类的相关API，Duration类模型的数量或在秒和纳秒的时间量。它可以使用其他基于时间的单位，如分钟和小时访问
+        Duration duration = Duration.between(dateTime1, dateTime2);
+        long diffHours = duration.toHours();// 相差小时数
+        System.out.println(diffHours);
+        System.out.println(duration.toDays());// 相差天数
+
+        // 使用Duration的get()相关方法，获取相差的秒、毫秒数
+        long diffSeconds = duration.get(ChronoUnit.SECONDS);
+        System.out.println(diffSeconds);// 相差秒数
     }
 
 

@@ -168,18 +168,35 @@ public class LocalDateTest {
     @Test
     public void compare(){
         LocalDate date1 = LocalDate.now();
-        LocalDate date2 = date1.minusDays(100);
-        // 1.使用LocalDate对象的compareTo()方法
-        // todo:这里的值怎么算
-        int differs = date1.compareTo(date2);// date1 - date2
+        LocalDate date2 = date1.plusDays(666);
+        /*
+        * 1.使用LocalDate对象的compareTo()方法，
+        *   先比较年份，若年份不一致，该方法返回年份差值，反之再比较月份
+        *   年份一致，比较月份，月份不一致，返回月份差值，反正比较日。依次类推
+        * */
+        int differs = date2.compareTo(date1);// date2 - date1
         System.out.println(differs);
-        // todo:这里的值怎么算
-        Period period = date1.until(date2);
-        System.out.println(period.getDays());
 
-        // 2.使用Period类进行比较
-        // todo:这里的值怎么算
-        Period period1 = Period.between(date2, date1);
-        System.out.println(period1.getMonths());
+        // 2.直接使用含时间单位参数的until()方法，直接返回以指定单位做时间度量单位的long型数值，不能整除的直接断尾
+        long differMonths = date1.until(date2, ChronoUnit.MONTHS);// until()方法，参数中的date2- data1
+        System.out.println("相差月数：" + differMonths);
+        long differDays = date1.until(date2, ChronoUnit.DAYS);
+        System.out.println("相差天数：" + differDays);
+
+        /*
+        * 3.使用until方法得到返回的Period类对象，再使用Period类的API获取相差的年、月、日。
+        *   Period类模型的数量或数量的时间，在几年，几个月和几天。表示为j年k月l天这种单元格式。
+        *   若使用get相关方法获取时，若使用getDays()，则返回对应day单元的值l，表示年月余下的天数，不是两个时间之间完整的天数
+        * */
+        Period period2 = date1.until(date2);
+        System.out.println(period2.getDays());// 这里的天是相差年、月后余下的天数，值不会超过月最大天数
+
+        // 4.使用Period类进行比较
+        Period period1 = Period.between(date1, date2);
+        System.out.println(period1.getYears());// 相差几年
+        System.out.println(period1.getMonths());// 相差几月
+        System.out.println(period1.getDays());// 相差几日
+        // 也可以使用get(),在方法内指定单元
+        System.out.println(period1.get(ChronoUnit.DAYS));
     }
 }
