@@ -1,6 +1,8 @@
 package com.ryang.springboot.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ryang.springboot.pojo.UserInfo;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @Auther: renyang
@@ -10,4 +12,7 @@ import com.ryang.springboot.pojo.UserInfo;
 public interface UserInfoService {
 
    UserInfo selectById(Integer userId);
+
+   PageInfo<UserInfo> userInfoList(@RequestParam(defaultValue = "0") Integer page,
+                                   @RequestParam(defaultValue = "0") Integer size);
 }

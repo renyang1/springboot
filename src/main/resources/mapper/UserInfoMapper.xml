@@ -22,4 +22,7 @@
         select * from userinfo where userid = #{userId} limit 1
     </select>
 
+    <select id="userInfoList" resultMap="BaseResultMap">
+        select * from userinfo
+    </select>
 </mapper>
